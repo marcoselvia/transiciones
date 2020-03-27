@@ -1,0 +1,74 @@
+@mixin max-width($max-width: 800px) {
+	max-width: $max-width;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.container{
+	@include max-width(1200px);
+}
+
+article{
+	@include max-width(800px);
+	background-color: #333;
+	padding: 15px;
+}
+// ejemplo3
+@mixin respond-to($width){
+  @media only screen and (min-width: $width){
+    @content;
+  }
+}
+
+aside{
+  background-color: skyblue;
+  @include respond-to(800px){
+    background-color: teal;
+  }
+}
+// ejemplo2
+aside{
+  background-color: skyblue;
+}
+
+@media only screen and (min-width: 800px) {
+  section {
+    background-color: teal;
+  }
+}
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin horizontal-list {
+  @include reset-list;
+
+  li {
+    display: inline-block;
+    margin: {
+      left: -2px;
+      right: 2em;
+    }
+  }
+}
+
+nav ul {
+  @include horizontal-list;
+}
+@mixin replace-text($image, $x: 50%, $y: 50%) {
+  text-indent: -99999em;
+  overflow: hidden;
+  text-align: left;
+
+  background: {
+    image: $image;
+    repeat: no-repeat;
+    position: $x $y;
+  }
+}
+
+.mail-icon {
+  @include replace-text(url("/imagenes/git.png"), 0);
+}
